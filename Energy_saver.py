@@ -12,7 +12,7 @@ import random
 
 # Page Configuration
 st.set_page_config(
-    page_title="SuryaShakti AI",
+    page_title="SHEOS",
     page_icon="☀️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -403,7 +403,7 @@ if 'num_panels' not in st.session_state:
     st.session_state.num_panels = 10
 
 # Header
-st.markdown('<div class="main-header">☀️ SURYASHAKTI AI</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-header">☀️ SHEOS</div>', unsafe_allow_html=True)
 st.markdown('<p style="text-align:center; color: #e2e8f0; font-size: 1.2rem; margin-top: -1rem; font-weight: 500;">Advanced Solar Analytics & Optimization Platform</p>', unsafe_allow_html=True)
 
 # Sidebar Configuration
@@ -1033,6 +1033,6 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #64748b; padding: 2rem;'>
     <p>⚡ Powered by Machine Learning • 🌍 Real-time Weather Integration • 💡 Smart Energy Optimization</p>
-    <p style='font-size: 0.9rem;'>SuryaShakti AI © 2025 - Revolutionizing Solar Energy Management</p>
+    <p style='font-size: 0.9rem;'>SHEOS © 2025 - Revolutionizing Solar Energy Management</p>
 </div>
 """, unsafe_allow_html=True)
