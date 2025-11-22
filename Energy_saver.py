@@ -12,8 +12,8 @@ import random
 
 # Page Configuration
 st.set_page_config(
-    page_title="SHEOS: Smart Home Energy Optimization System.",
-    page_icon="☀",
+    page_title="SuryaShakti AI",
+    page_icon="☀️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -29,7 +29,7 @@ st.markdown("""
     
     /* Main background */
     .stApp {
-        background: linear-gradient(180deg, #ffffff 0%, #dbeafe 100%);
+        background: linear-gradient(135deg, #0a0e1a 0%, #1a1332 50%, #0a0e1a 100%);
     }
     
     /* Animated background orbs */
@@ -40,7 +40,7 @@ st.markdown("""
         left: 5%;
         width: 300px;
         height: 300px;
-        background: radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(234, 179, 8, 0.08) 0%, transparent 70%);
         border-radius: 50%;
         animation: pulse 4s ease-in-out infinite;
         z-index: 0;
@@ -72,20 +72,30 @@ st.markdown("""
     
     /* Card styling */
     .metric-card {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(30, 41, 59, 0.95);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(148, 163, 184, 0.3);
         border-radius: 16px;
         padding: 1.5rem;
         margin: 0.5rem 0;
         transition: all 0.3s ease;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        color: #f1f5f9;
     }
     
     .metric-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
-        border-color: rgba(251, 191, 36, 0.5);
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+        border-color: rgba(251, 191, 36, 0.6);
+        background: rgba(30, 41, 59, 1);
+    }
+    
+    .metric-card h3, .metric-card h4 {
+        color: #e2e8f0;
+    }
+    
+    .metric-card p {
+        color: #cbd5e1;
     }
     
     /* Metric value styling */
@@ -117,30 +127,42 @@ st.markdown("""
     
     /* Sidebar styling */
     .css-1d391kg {
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(15, 23, 42, 0.98);
         backdrop-filter: blur(10px);
+    }
+    
+    [data-testid="stSidebar"] {
+        background: rgba(15, 23, 42, 0.98);
+    }
+    
+    [data-testid="stSidebar"] * {
+        color: #e2e8f0 !important;
+    }
+    
+    [data-testid="stSidebar"] .stMarkdown {
+        color: #f1f5f9 !important;
     }
     
     /* Tab styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(30, 41, 59, 0.8);
         padding: 0.5rem;
         border-radius: 12px;
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(51, 65, 85, 0.8);
         border-radius: 8px;
-        color: white;
+        color: #e2e8f0;
         font-weight: 600;
         padding: 0.75rem 1.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(148, 163, 184, 0.3);
     }
     
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
-        color: #1e293b;
+        color: #0f172a;
         border: none;
     }
     
@@ -175,10 +197,47 @@ st.markdown("""
     
     /* Input fields */
     .stTextInput>div>div>input, .stNumberInput>div>div>input {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(30, 41, 59, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.4);
         border-radius: 8px;
-        color: white;
+        color: #f1f5f9;
+    }
+    
+    .stTextInput>div>div>input:focus, .stNumberInput>div>div>input:focus {
+        border-color: #fbbf24;
+        box-shadow: 0 0 0 1px #fbbf24;
+    }
+    
+    /* Labels */
+    label {
+        color: #e2e8f0 !important;
+        font-weight: 500 !important;
+    }
+    
+    /* General text */
+    p, span, div {
+        color: #cbd5e1;
+    }
+    
+    /* Ensure all text is readable */
+    .stMarkdown, .stText {
+        color: #e2e8f0 !important;
+    }
+    
+    /* Dataframe styling */
+    .dataframe {
+        color: #f1f5f9 !important;
+    }
+    
+    .dataframe th {
+        background: rgba(30, 41, 59, 0.9) !important;
+        color: #fbbf24 !important;
+        font-weight: 600 !important;
+    }
+    
+    .dataframe td {
+        background: rgba(30, 41, 59, 0.6) !important;
+        color: #e2e8f0 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -194,7 +253,7 @@ LOAD_PROFILE = {
 }
 
 class SolarHomeSystem:
-    def _init_(self, df, num_panels):
+    def __init__(self, df, num_panels):
         self.df = df
         self.num_panels = num_panels
         self.scaler = StandardScaler()
@@ -344,12 +403,12 @@ if 'num_panels' not in st.session_state:
     st.session_state.num_panels = 10
 
 # Header
-st.markdown('<div class="main-header">☀ SHEOS</div>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; color: #cbd5e1; font-size: 1.2rem; margin-top: -1rem;">Advanced Solar Analytics & Optimization Platform</p>', unsafe_allow_html=True)
+st.markdown('<div class="main-header">☀️ SURYASHAKTI AI</div>', unsafe_allow_html=True)
+st.markdown('<p style="text-align:center; color: #e2e8f0; font-size: 1.2rem; margin-top: -1rem; font-weight: 500;">Advanced Solar Analytics & Optimization Platform</p>', unsafe_allow_html=True)
 
 # Sidebar Configuration
 with st.sidebar:
-    st.markdown("### ⚙ System Configuration")
+    st.markdown("### ⚙️ System Configuration")
     
     uploaded_file = st.file_uploader("📁 Upload Weather Data (CSV)", type=['csv'])
     
@@ -394,12 +453,12 @@ with st.sidebar:
                 r2 = st.session_state.system.train_solar_ai()
                 st.success(f"✅ Model Trained! Accuracy: {r2*100:.2f}%")
         else:
-            st.warning("⚠ Please upload CSV data first!")
+            st.warning("⚠️ Please upload CSV data first!")
     
     st.markdown("---")
     st.markdown("### 📊 Load Profile")
     for appliance, data in LOAD_PROFILE.items():
-        st.markdown(f"{appliance}")
+        st.markdown(f"**{appliance}**")
         st.text(f"Qty: {data['qty']} | {data['kwh']} kWh")
 
 # Main Content
@@ -423,26 +482,26 @@ if st.session_state.system is not None:
         
         with col1:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-            st.markdown("📅 Date & Time**")
-            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['datetime'].strftime('%d/%m/%Y %H:%M')}</h3>", unsafe_allow_html=True)
+            st.markdown("**📅 Date & Time**")
+            st.markdown(f"<h3 style='color: #93c5fd; margin-top: 0.5rem;'>{current_row['datetime'].strftime('%d/%m/%Y %H:%M')}</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col2:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-            st.markdown("🌡 Temperature**")
-            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['temperature_C']}°C</h3>", unsafe_allow_html=True)
+            st.markdown("**🌡️ Temperature**")
+            st.markdown(f"<h3 style='color: #fdba74; margin-top: 0.5rem;'>{current_row['temperature_C']}°C</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col3:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-            st.markdown("☁ Cloud Cover**")
-            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['cloud_percentage']}%</h3>", unsafe_allow_html=True)
+            st.markdown("**☁️ Cloud Cover**")
+            st.markdown(f"<h3 style='color: #c4b5fd; margin-top: 0.5rem;'>{current_row['cloud_percentage']}%</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col4:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-            st.markdown("☀ Irradiance**")
-            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['irradiance_W_m2']} W/m²</h3>", unsafe_allow_html=True)
+            st.markdown("**☀️ Irradiance**")
+            st.markdown(f"<h3 style='color: #fcd34d; margin-top: 0.5rem;'>{current_row['irradiance_W_m2']} W/m²</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -467,10 +526,10 @@ if st.session_state.system is not None:
         
         with col2:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-            st.markdown("⚙ System Info**")
-            st.markdown(f"Active Panels: *{system.num_panels}*")
-            st.markdown(f"Total Area: *{system.num_panels * PANEL_AREA_M2} m²*")
-            st.markdown(f"Grid Rate: *₹{GRID_RATE}/kWh*")
+            st.markdown("**⚙️ System Info**")
+            st.markdown(f"<p style='color: #e2e8f0;'>Active Panels: <strong style='color: #fbbf24;'>{system.num_panels}</strong></p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='color: #e2e8f0;'>Total Area: <strong style='color: #fbbf24;'>{system.num_panels * PANEL_AREA_M2} m²</strong></p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='color: #e2e8f0;'>Grid Rate: <strong style='color: #fbbf24;'>₹{GRID_RATE}/kWh</strong></p>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         # 3D Panel Visualization
@@ -489,8 +548,9 @@ if st.session_state.system is not None:
                                     border-radius: 8px; padding: 1rem; text-align: center;
                                     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
                                     animation: pulse 2s ease-in-out infinite;
-                                    animation-delay: {panel_num * 0.1}s;'>
-                            <strong style='font-size: 1.2rem;'>#{panel_num}</strong>
+                                    animation-delay: {panel_num * 0.1}s;
+                                    border: 2px solid rgba(147, 197, 253, 0.3);'>
+                            <strong style='font-size: 1.2rem; color: #e0f2fe;'>#{panel_num}</strong>
                         </div>
                         """, unsafe_allow_html=True)
     
@@ -571,8 +631,8 @@ if st.session_state.system is not None:
         
         with col2:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-            st.markdown("⚡ Current Generation**")
-            st.markdown(f"<h2 style='color: #10b981;'>{gen:.3f} kW</h2>", unsafe_allow_html=True)
+            st.markdown("**⚡ Current Generation**")
+            st.markdown(f"<h2 style='color: #34d399; margin-top: 0.5rem;'>{gen:.3f} kW</h2>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -584,21 +644,21 @@ if st.session_state.system is not None:
         
         with col1:
             st.markdown('<div class="metric-card" style="text-align: center;">', unsafe_allow_html=True)
-            st.markdown("☀ Solar Generation**")
-            st.markdown(f"<h2 style='color: #fbbf24;'>{gen:.2f} kW</h2>", unsafe_allow_html=True)
+            st.markdown("**☀️ Solar Generation**")
+            st.markdown(f"<h2 style='color: #fcd34d; margin-top: 0.5rem;'>{gen:.2f} kW</h2>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col2:
             st.markdown('<div class="metric-card" style="text-align: center;">', unsafe_allow_html=True)
-            st.markdown("🏠 House Load**")
-            st.markdown(f"<h2 style='color: #60a5fa;'>{load:.2f} kW</h2>", unsafe_allow_html=True)
+            st.markdown("**🏠 House Load**")
+            st.markdown(f"<h2 style='color: #93c5fd; margin-top: 0.5rem;'>{load:.2f} kW</h2>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col3:
             if net > 0:
                 st.markdown(f"""
                 <div class='warning-box' style='text-align: center;'>
-                    <h3>⚠ Grid Import</h3>
+                    <h3>⚠️ Grid Import</h3>
                     <h2>{net:.2f} kW</h2>
                     <p>Cost: ₹{net*GRID_RATE:.2f}/hr</p>
                 </div>
@@ -644,7 +704,7 @@ if st.session_state.system is not None:
     # TAB 4: Smart Scheduler
     with tab4:
         st.markdown("### ⚡ Intelligent Load Scheduling")
-        st.markdown("*Best times to run heavy appliances in the next 24 hours*")
+        st.markdown("**Best times to run heavy appliances in the next 24 hours**")
         
         best_slots = system.intelligent_scheduler()
         
@@ -660,8 +720,8 @@ if st.session_state.system is not None:
                     <div style='display: flex; align-items: center; gap: 1rem;'>
                         <div style='font-size: 2rem;'>{medal}</div>
                         <div>
-                            <h3 style='margin: 0; color: #fbbf24;'>Rank #{rank}</h3>
-                            <p style='margin: 0; color: #cbd5e1;'>🕒 {row['datetime'].strftime('%d/%m %H:%M')}</p>
+                            <h3 style='margin: 0; color: #fcd34d;'>Rank #{rank}</h3>
+                            <p style='margin: 0; color: #e2e8f0; font-weight: 500;'>🕒 {row['datetime'].strftime('%d/%m %H:%M')}</p>
                         </div>
                     </div>
                 </div>
@@ -670,8 +730,8 @@ if st.session_state.system is not None:
             with col2:
                 st.markdown(f"""
                 <div class='metric-card' style='text-align: center;'>
-                    <h2 style='color: #10b981; margin: 0;'>{row['pred']:.2f} kW</h2>
-                    <p style='color: #94a3b8; margin: 0;'>Available</p>
+                    <h2 style='color: #34d399; margin: 0;'>{row['pred']:.2f} kW</h2>
+                    <p style='color: #cbd5e1; margin: 0;'>Available</p>
                 </div>
                 """, unsafe_allow_html=True)
             
@@ -682,12 +742,12 @@ if st.session_state.system is not None:
         # Recommendations
         st.markdown("""
         <div class='metric-card'>
-            <h3>💡 Smart Recommendations</h3>
-            <ul style='color: #cbd5e1; line-height: 2;'>
+            <h3 style='color: #fcd34d;'>💡 Smart Recommendations</h3>
+            <ul style='color: #e2e8f0; line-height: 2;'>
                 <li>✅ Run Washing Machine during top 3 time slots for maximum savings</li>
                 <li>✅ Charge EV during peak solar hours (12:00-15:00)</li>
                 <li>✅ Use dishwasher, water heater during high generation periods</li>
-                <li>⚠ Avoid heavy loads after 18:00 (low solar availability)</li>
+                <li>⚠️ Avoid heavy loads after 18:00 (low solar availability)</li>
                 <li>💰 Shifting 1 kW load from night to solar hours saves ₹7/hour</li>
             </ul>
         </div>
@@ -892,13 +952,13 @@ if st.session_state.system is not None:
         
         # Note
         st.markdown("""
-        <div class='metric-card' style='background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
-                                       border: 1px solid rgba(251, 191, 36, 0.3);'>
-            <h4>📝 Important Notes:</h4>
-            <ul style='color: #cbd5e1; line-height: 1.8;'>
-                <li><strong>Scenario A (Grid Only):</strong> No solar panels, all power from grid at ₹7/kWh</li>
-                <li><strong>Scenario B (Solar Unoptimized):</strong> Has solar panels but runs heavy loads at night/evening (poor timing)</li>
-                <li><strong>Scenario C (Solar + AI):</strong> Intelligently schedules heavy loads during peak solar hours</li>
+        <div class='metric-card' style='background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(249, 115, 22, 0.15) 100%);
+                                       border: 1px solid rgba(251, 191, 36, 0.4);'>
+            <h4 style='color: #fcd34d;'>📝 Important Notes:</h4>
+            <ul style='color: #e2e8f0; line-height: 1.8;'>
+                <li><strong style='color: #fbbf24;'>Scenario A (Grid Only):</strong> No solar panels, all power from grid at ₹7/kWh</li>
+                <li><strong style='color: #fbbf24;'>Scenario B (Solar Unoptimized):</strong> Has solar panels but runs heavy loads at night/evening (poor timing)</li>
+                <li><strong style='color: #fbbf24;'>Scenario C (Solar + AI):</strong> Intelligently schedules heavy loads during peak solar hours</li>
                 <li>💡 The "Extra AI Savings" represents money saved just by better timing of appliance usage</li>
                 <li>⚡ Fixed loads (AC at night, fans 24/7, LEDs evening) are same across all scenarios</li>
                 <li>🔋 Variable load (Washing Machine) timing makes the difference in optimization</li>
@@ -910,8 +970,8 @@ else:
     # Welcome Screen
     st.markdown("""
     <div class='metric-card' style='text-align: center; padding: 3rem; margin: 2rem 0;'>
-        <h1 style='color: #fbbf24; margin-bottom: 1rem;'>👈 Get Started</h1>
-        <p style='color: #cbd5e1; font-size: 1.2rem;'>
+        <h1 style='color: #fcd34d; margin-bottom: 1rem;'>👈 Get Started</h1>
+        <p style='color: #e2e8f0; font-size: 1.2rem; line-height: 1.8;'>
             1. Upload your weather CSV file in the sidebar<br>
             2. Configure number of solar panels<br>
             3. Click "Initialize System" to begin<br>
@@ -926,8 +986,8 @@ else:
     with col1:
         st.markdown("""
         <div class='metric-card'>
-            <h3>🎯 Key Features</h3>
-            <ul style='color: #cbd5e1; line-height: 2;'>
+            <h3 style='color: #fcd34d;'>🎯 Key Features</h3>
+            <ul style='color: #e2e8f0; line-height: 2;'>
                 <li>📡 Real-time generation monitoring</li>
                 <li>📅 24-hour AI-powered forecasting</li>
                 <li>🏠 Dynamic load monitoring</li>
@@ -940,12 +1000,12 @@ else:
     with col2:
         st.markdown("""
         <div class='metric-card'>
-            <h3>🧠 AI Capabilities</h3>
-            <ul style='color: #cbd5e1; line-height: 2;'>
+            <h3 style='color: #fcd34d;'>🧠 AI Capabilities</h3>
+            <ul style='color: #e2e8f0; line-height: 2;'>
                 <li>🤖 Random Forest ML model</li>
                 <li>📊 3-year weather data training</li>
                 <li>🎯 High accuracy predictions (90%+)</li>
-                <li>⚙ Physics-based calculations</li>
+                <li>⚙️ Physics-based calculations</li>
                 <li>📈 Optimization algorithms</li>
             </ul>
         </div>
@@ -954,8 +1014,8 @@ else:
     # Sample data format
     st.markdown("""
     <div class='metric-card'>
-        <h3>📋 Required CSV Format</h3>
-        <p style='color: #cbd5e1;'>Your CSV file should contain these columns:</p>
+        <h3 style='color: #fcd34d;'>📋 Required CSV Format</h3>
+        <p style='color: #e2e8f0;'>Your CSV file should contain these columns:</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -973,6 +1033,6 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #64748b; padding: 2rem;'>
     <p>⚡ Powered by Machine Learning • 🌍 Real-time Weather Integration • 💡 Smart Energy Optimization</p>
-    <p style='font-size: 0.9rem;'>SHEOS © 2025 - Revolutionizing Solar Energy Management</p>
+    <p style='font-size: 0.9rem;'>SuryaShakti AI © 2025 - Revolutionizing Solar Energy Management</p>
 </div>
 """, unsafe_allow_html=True)
