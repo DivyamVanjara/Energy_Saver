@@ -29,7 +29,7 @@ st.markdown("""
     
     /* Main background */
     .stApp {
-       background: linear-gradient(135deg, #f5f3ff 0%, #d8b4fe 100%);
+       background: linear-gradient(135deg, #fff0f5 0%, #e6e6fa 50%, #e0ffff 100%);
     }
     
     /* Animated background orbs */
@@ -345,7 +345,7 @@ if 'num_panels' not in st.session_state:
 
 # Header
 st.markdown('<div class="main-header">☀️ SHEOS</div>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; color: #cbd5e1; font-size: 1.2rem; margin-top: -1rem;">Advanced Solar Analytics & Optimization Platform</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align:center; color: #94a3b8; font-size: 1.2rem; margin-top: -1rem;">Advanced Solar Analytics & Optimization Platform</p>', unsafe_allow_html=True)
 
 # Sidebar Configuration
 with st.sidebar:
