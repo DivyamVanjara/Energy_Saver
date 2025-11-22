@@ -424,25 +424,25 @@ if st.session_state.system is not None:
         with col1:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
             st.markdown("📅 Date & Time**")
-            st.markdown(f"<h3 style='color: #60a5fa;'>{current_row['datetime'].strftime('%d/%m/%Y %H:%M')}</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['datetime'].strftime('%d/%m/%Y %H:%M')}</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col2:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
             st.markdown("🌡 Temperature**")
-            st.markdown(f"<h3 style='color: #fb923c;'>{current_row['temperature_C']}°C</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['temperature_C']}°C</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col3:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
             st.markdown("☁ Cloud Cover**")
-            st.markdown(f"<h3 style='color: #a78bfa;'>{current_row['cloud_percentage']}%</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['cloud_percentage']}%</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col4:
             st.markdown('<div class="metric-card">', unsafe_allow_html=True)
             st.markdown("☀ Irradiance**")
-            st.markdown(f"<h3 style='color: #fbbf24;'>{current_row['irradiance_W_m2']} W/m²</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='color: #cbd5e1;'>{current_row['irradiance_W_m2']} W/m²</h3>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -462,7 +462,7 @@ if st.session_state.system is not None:
         with col1:
             st.markdown('<div class="metric-card" style="text-align: center; padding: 2rem;">', unsafe_allow_html=True)
             st.markdown(f'<p class="big-metric">{current_gen:.3f} kW</p>', unsafe_allow_html=True)
-            st.markdown("<p style='color: #94a3b8; font-size: 1.2rem;'>Current Power Output</p>", unsafe_allow_html=True)
+            st.markdown("<p style='color: #cbd5e1; font-size: 1.2rem;'>Current Power Output</p>", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col2:
