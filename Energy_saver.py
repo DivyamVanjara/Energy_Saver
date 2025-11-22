@@ -29,7 +29,7 @@ st.markdown("""
     
     /* Main background */
     .stApp {
-        background: linear-gradient(135deg, #f5f3ff 0%, #d8b4fe 100%);
+       background: linear-gradient(135deg, #f0f9ff 0%, #cbebff 100%);
     }
     
     /* Animated background orbs */
